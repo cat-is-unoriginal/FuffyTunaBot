@@ -28,7 +28,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 	luck = random.randint(1,tuna_chance)
 	print("your lucky number is " + str(luck))
 	
-	if ctx.content.lower() == 'this is so sad alexa play despacito' or ctx.content.lower() == 'despacito':
+	if ctx.content.lower() == 'this is so sad alexa play despacito' or ctx.content.lower() == 'despacito' or ctx.content.lower() == 'alex play despacito':
 		print(ctx.author.voice_channel)
 		if ctx.author.voice_channel:
 			twochance = random.randint(1,20)
@@ -50,7 +50,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 			await client.send_message(ctx.channel, 'ur not in a voice channel u dumb dumb')
 		
 	
-	if ctx.content.lower() == 'this is so sad alexa play despayeeto' or ctx.content.lower() == 'despayeeto': # didn't realize this was broken, now fixed
+	if ctx.content.lower() == 'this is so sad alexa play despayeeto' or ctx.content.lower() == 'despayeeto' or ctx.content.lower() == 'alex play despayeeto':
 		twochance = random.randint(1,20)
 		print("Playing Despayeeto")
 		await client.send_message(ctx.channel, 'Playing Despayeeto')
@@ -103,4 +103,4 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		bibleverse = sample(sentences, 1)
 		await client.send_message(ctx.channel, "And I quoth from FuffyTuna.txt \n" + bibleverse + "\n want to read more? Just say \"FuffyTuna please\"")
 
-client.run("") #Hopefully I don't leak this again
+client.run("NDcwNjczNDMxODUxOTU4Mjgy.DjgBng.-MUfZVy8vpUMPHkn6QAff098o2o") #Hopefully I don't leak this again
