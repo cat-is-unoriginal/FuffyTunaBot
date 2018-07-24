@@ -99,4 +99,4 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		bibleverse = sample(sentences, 1)
 		await client.send_message(ctx.channel, "And I quoth from FuffyTuna.txt \n" + bibleverse + "\n want to read more? Just say \"FuffyTuna please\"")
 
-client.run("NDcwNjczNDMxODUxOTU4Mjgy.DjgBng.-MUfZVy8vpUMPHkn6QAff098o2o") #Hopefully I don't leak this again
+client.run("") #Hopefully I don't leak this again
