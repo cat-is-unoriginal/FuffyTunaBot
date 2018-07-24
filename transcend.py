@@ -23,38 +23,40 @@ async def on_ready():
 	print ("ctx of the day: your computer is now infected by ligma")
 	
 @client.event
+async def on_message(ctx):
+	if ctx.content.lower() == 'this is so sad alexa play despacito' or ctx.content.lower() == 'despacito':
+		twochance = random.randint(1,20)
+		print("despacito roll: " + str(twochance)
+		
+		if twochance == 2: # stupid bug right here about syntax that i can't figure out
+			await client.send_message(ctx.channel, 'You have been selected by the Illuminati to listen to Despacito 2.\nPlaying Despacito 2')
+			voice = await client.join_voice_channel(ctx.author.voice_channel)
+			player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=W3GrSMYbkBE')
+			player.start()
+			
+		else:
+			await client.send_message(ctx.channel, 'Playing Despacito')
+			voice = await client.join_voice_channel(ctx.author.voice_channel)
+			player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=kJQP7kiw5Fk')
+			player.start()
+		
+
+@client.event
 async def on_message(ctx): # I replaced message with ctx since thats what all the cool kids are doing
 
 	luck = random.randint(1,tuna_chance)
 	print("your lucky number is " + str(luck))
 	
-	if ctx.content.lower() == 'this is so sad alexa play despacito' or ctx.content.lower() == 'despacito':
+	
+	if ctx.content.lower() == 'this is so sad alexa play despayeeto' or ctx.content.lower() == 'despayeeto': # didn't realize this was broken, now fixed
 		twochance = random.randint(1,20)
-		print("despacito roll: " + str(twochance)
-		
-		#if twochance == 2: # stupid bug right here about syntax that i can't figure out
-		#	print("Playing Despacito 2")
-		#	await client.send_message(ctx.channel, 'You have been selected by the Illuminati to listen to Despacito 2.\nPlaying Despacito 2')
-		#	voice = await client.join_voice_channel(ctx.author.voice_channel)
-		#	player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=W3GrSMYbkBE')
-		#	player.start()
-			
-		#else:
-		print("Playing Despacito")
-		await client.send_message(ctx.channel, 'Playing Despacito')
-		voice = await client.join_voice_channel(ctx.author.voice_channel)
-		player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=kJQP7kiw5Fk')
-		player.start()
-		
-	if ctx.content.lower() == 'this is so sad alexa play despayeeto' or ctx.content.lower() == 'despayeeto':
-		twochance = random.randint(1,20)
-		print("Playing Despacito")
-		await client.send_message(ctx.channel, 'Playing Despacito')
+		print("Playing Despayeeto")
+		await client.send_message(ctx.channel, 'Playing Despayeeto')
 		try:
 			voice = await client.join_voice_channel(ctx.author.voice_channel)
 		except:
 			pass
-		player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=kJQP7kiw5Fk')
+		player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=jEddfV8Ts3g')
 		player.start()
 
 	if ctx.content.lower() == 'fuffytuna disconnect':
@@ -88,7 +90,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		if ctx.author.id == "247852652019318795" and ctx.content.startswith("Hi"):
 			await client.delete_message(ctx)
 			await client.send_message(ctx.channel, "don\'t you fricking dare dadbot, trying to abuse poor " + victim + ", your on thin ice " + ctx.author.mention)
-			victim = ""  https://www.youtube.com/watch?v=jEddfV8Ts3g
+			victim = ""  
 		
 	if luck == 1:
 		print("You win!!")
@@ -97,4 +99,4 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		bibleverse = sample(sentences, 1)
 		await client.send_message(ctx.channel, "And I quoth from FuffyTuna.txt \n" + bibleverse + "\n want to read more? Just say \"FuffyTuna please\"")
 
-client.run("") #Hopefully I don't leak this again
+client.run("NDcwNjczNDMxODUxOTU4Mjgy.DjgBng.-MUfZVy8vpUMPHkn6QAff098o2o") #Hopefully I don't leak this again
