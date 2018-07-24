@@ -82,4 +82,4 @@ async def on_message(message):
 		bibleverse = sample(sentences, 1)
 		await client.send_message(message.channel, "And I quoth from FuffyTuna.txt \n" + str(bibleverse) + "\n want to read more? Just say \"FuffyTuna please\"")
 
-client.run("NDcwNjczNDMxODUxOTU4Mjgy.DjZ_6g.tvio4kQbxLCGFTE2HBPyWCpdxpU")
+client.run("")
