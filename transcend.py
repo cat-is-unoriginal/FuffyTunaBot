@@ -1,18 +1,22 @@
 # FuffyTuna
-# Version 0.1.0 bby
+# Version 0.2.0 bby
 # By Cat#5854
+
+# Make this into a command: despatomatone, https://www.youtube.com/watch?v=bQJU82Lk79g
 
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
-import re
 from random import sample
+import re
+import numpy as np
+import pandas as pd
 
 client = discord.Client()
 sentences = ""
-dadbot_censor = False # people on my server were not happy with the censoring of dadbot ( I love the censorship and begrudgingly obliged )
+dadbot_censor = False # people on my server were not happy with the censoring of dadbot ( I love the censorship and but I begrudgingly obliged )
 tuna_chance = 150 # a one in five hundred chance
 
 @client.event
@@ -34,7 +38,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 			twochance = random.randint(1,20)
 			print("despacito roll: " + str(twochance))
 		
-			if twochance == 2: # stupid bug right here about syntax that i can't figure out
+			if twochance == 2:
 				await client.send_message(ctx.channel, 'You have been selected by the Illuminati to listen to Despacito 2.\nPlaying Despacito 2')
 				voice = await client.join_voice_channel(ctx.author.voice_channel)
 				player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=W3GrSMYbkBE')
@@ -84,11 +88,77 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		...FuffyTuna leave the voice channel 
 		FuffyTuna please: 
 		...Gives you the whole original fanfic 
+		FuffyTuna make command # <insert command name>;<insert command result>: 
+		...Gives you the whole original fanfic
+		FuffyTuna help make command
+		...More in depth explanation of command syntax
+		FuffyTuna show commands:
+		...Shows all custom commands
 		""")
+
+	if ctx.content.lower() == 'fuffytuna help make command':
+		await client.send_message(ctx.channel,"""
+		FuffyTuna will let you make a automatic responce to any word!
+		To create this 'command' simple type
+		FuffyTuna make command <insert command>;<insert responce>
+		Example:
+		FuffyTuna make command oh hi mark;i did not hit her i did not
+		WARNING:
+		ALWAYS HAVE AT LEAST TWO COMMANDS OR IT DOESN'T WORK
+		HELP IT ISN'T WORKING!?
+		Did you add a space after the command?
+		If that doesn't work ask Cat#5854
+		""")
+
+	# read custom commands
+	if ctx.author.id != 470673431851958282:
+		with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt','r') as f: # short for command wink wink
+			for i, l in enumerate(f):
+				pass
+			count =  i + 1
+			print(str(count))
+			
+			cmd_array = np.genfromtxt('commands.txt', dtype='str', delimiter=';') # FINALLLLY I FIGURED IT OUT
+			print(str(cmd_array[:]))
 	
+			i = 0
+			for i in range(count):
+				if ctx.content == cmd_array[i,0]:
+					await client.send_message(ctx.channel, cmd_array[i,1])
+
+	# write custom commands
+	if ctx.content.lower().startswith("fuffytuna make command"):
+		if ';' in ctx.content:
+			spliced_ctx = ctx.content[23:]
+			print(spliced_ctx)
+			with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt','a') as f:
+				f.write('\n' + spliced_ctx)
+			split_ctx = ctx.content[23:].split(";")
+			await client.send_message(ctx.channel, "MADE COMMAND!\nCommand: " + split_ctx[0] + "\nWith responce: " + split_ctx[1])
+		else:
+			await client.send_message(ctx.channel, "Improper syntax")
+
+	# show custom commands
+	if ctx.content.lower() == 'fuffytuna show commands':
+		command_listing = ''
+		with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt') as f:
+			for line in f:
+				command_listing += line
+		await client.send_message(ctx.channel, "Custom commands available are:\n" + command_listing)
+
+	# delete custom commands
+	if ctx.content.lower().startswith("fuffytuna delete command"): #25
+		command = ctx.content[25:]
+		with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt',"r") as f:
+			lines = f.readlines()
+		with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt',"w") as f:
+			for line in lines:
+				if line.startswith(command) == False:
+					f.write(line)
+		await client.send_message(ctx.channel, "Deleted command: " + command)
 	if dadbot_censor == True:
-		if ctx.content.lower().startswith("im") or ctx.content.lower().startswith("i'm"): #i wonder why .lower() has parenthesis for arguments even though it has none
-			global victim #global bc i needed to use it in the next part the send message part
+		if ctx.content.lower().startswith("im") or ctx.content.lower().startswith("i'm"): # i wonder why .lower() has parenthesis for arguments even though it has none
+			global victim # global bc i needed to use it in the next part the send message part
 			victim = ctx.author.mention
 		
 		if ctx.author.id == "247852652019318795" and ctx.content.startswith("Hi"):
@@ -97,10 +167,11 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 			victim = ""  
 		
 	if luck == 1:
-		print("You win!!")
-		with open('FuffyTunaWithXtraFullstops.txt') as fuffy:
-			sentences = re.findall(r".*?[\.\!\?]+", fuffy.read())
-		bibleverse = sample(sentences, 1)
-		await client.send_message(ctx.channel, "And I quoth from FuffyTuna.txt \n" + bibleverse + "\n want to read more? Just say \"FuffyTuna please\"")
+		if ctx.author.bot == False:
+			print("You win!!")
+			with open('FuffyTunaWithXtraFullstops.txt') as fuffy:
+				sentences = re.findall(r".*?[\.\!\?]+", fuffy.read())
+			bibleverse = sample(sentences, 1)
+			await client.send_message(ctx.channel, "And I quoth from FuffyTuna.txt \n" + str(bibleverse) + "\n want to read more? Just say \"FuffyTuna please\"")
 
-client.run("NDcwNjczNDMxODUxOTU4Mjgy.DjgBng.-MUfZVy8vpUMPHkn6QAff098o2o") #Hopefully I don't leak this again
+client.run("") # Fuck you Klasa
