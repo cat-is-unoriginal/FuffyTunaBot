@@ -55,7 +55,6 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		
 	
 	if ctx.content.lower() == 'this is so sad alexa play despayeeto' or ctx.content.lower() == 'despayeeto' or ctx.content.lower() == 'alex play despayeeto':
-		twochance = random.randint(1,20)
 		print("Playing Despayeeto")
 		await client.send_message(ctx.channel, 'Playing Despayeeto')
 		try:
@@ -63,6 +62,16 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		except:
 			pass
 		player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=jEddfV8Ts3g')
+		player.start()
+
+	if ctx.content.lower() == 'this is so sad alexa play despatomatone' or ctx.content.lower() == 'despatomatone' or ctx.content.lower() == 'alex play despatomatone':
+		print("Playing Despatomatone")
+		await client.send_message(ctx.channel, 'Playing Despatomatone')
+		try:
+			voice = await client.join_voice_channel(ctx.author.voice_channel)
+		except:
+			pass
+		player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=bQJU82Lk79g')
 		player.start()
 
 	if ctx.content.lower() == 'asdf':
@@ -83,7 +92,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		this is so sad alexa play despacito: 
 		...Plays despacito in your voice channel 
 		this is so sad alexa play despayeeto: 
-		...Plays despacito in your voice channel 
+		...Plays despayeeto in your voice channel 
 		asdf: 
 		...FuffyTuna leave the voice channel 
 		FuffyTuna please: 
@@ -94,13 +103,15 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		...More in depth explanation of command syntax
 		FuffyTuna show commands:
 		...Shows all custom commands
+		FuffyTuna delete command:
+		...Deletes that command (DO NOT LET COMMANDS BECOME LESS THAN TWO)
 		""")
 
 	if ctx.content.lower() == 'fuffytuna help make command':
 		await client.send_message(ctx.channel,"""
-		FuffyTuna will let you make a automatic responce to any word!
+		FuffyTuna will let you make a automatic response to any word!
 		To create this 'command' simple type
-		FuffyTuna make command <insert command>;<insert responce>
+		FuffyTuna make command <insert command>;<insert response>
 		Example:
 		FuffyTuna make command oh hi mark;i did not hit her i did not
 		WARNING:
@@ -111,7 +122,8 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 		""")
 
 	# read custom commands
-	if ctx.author.id != 470673431851958282:
+	print(str(ctx.author.id))
+	if ctx.author.id != client.user.id:
 		with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt','r') as f: # short for command wink wink
 			for i, l in enumerate(f):
 				pass
@@ -134,7 +146,7 @@ async def on_message(ctx): # I replaced message with ctx since thats what all th
 			with open(r'C:\Users\Cat\Documents\FuffyTunaBot\commands.txt','a') as f:
 				f.write('\n' + spliced_ctx)
 			split_ctx = ctx.content[23:].split(";")
-			await client.send_message(ctx.channel, "MADE COMMAND!\nCommand: " + split_ctx[0] + "\nWith responce: " + split_ctx[1])
+			await client.send_message(ctx.channel, "MADE COMMAND!\nCommand: " + split_ctx[0] + "\nWith responcs: " + split_ctx[1])
 		else:
 			await client.send_message(ctx.channel, "Improper syntax")
 
