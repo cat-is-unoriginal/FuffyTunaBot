@@ -7,6 +7,10 @@ Made in Discord.py
 
 -A 1/150 chance when someone sends a message for a horrible fanfic to reply to their message
 
+-Custom commands
+
+-Custom command management
+
 -Capitalization blindness
 
 -The ability to play Despacito
